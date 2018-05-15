@@ -5,11 +5,14 @@
  */
 package ml.bma.bsop.ui;
 
+import com.vaadin.annotations.Push;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Viewport;
 import com.vaadin.server.DefaultErrorHandler;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinService;
+import com.vaadin.shared.communication.PushMode;
+import com.vaadin.shared.ui.ui.Transport;
 import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.spring.navigator.SpringViewProvider;
 import com.vaadin.ui.Notification;
@@ -187,8 +190,8 @@ public class BSOPProductionUI extends TranslatableUI implements Translatable {
     private void showMain() {
         // Now when the session is reinitialized, we can enable websocket communication. Or we could have just
         // used WEBSOCKET_XHR and skipped this step completely.
-        //getPushConfiguration().setTransport(Transport.WEBSOCKET);
-        //getPushConfiguration().setPushMode(PushMode.AUTOMATIC);
+        getPushConfiguration().setTransport(Transport.WEBSOCKET);
+        getPushConfiguration().setPushMode(PushMode.AUTOMATIC);
         // Show the main UI
         
         
