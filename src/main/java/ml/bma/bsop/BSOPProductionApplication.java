@@ -8,12 +8,18 @@ import java.io.Serializable;
 import javax.servlet.ServletException;
 import ml.bma.bsop.security.SecuredViewAccessControl;
 import ml.bma.bsop.security.VaadinSessionSecurityContextHolderStrategy;
+import org.apache.catalina.Context;
+import org.apache.catalina.connector.Connector;
+import org.apache.tomcat.util.descriptor.web.SecurityCollection;
+import org.apache.tomcat.util.descriptor.web.SecurityConstraint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration;
 import org.springframework.boot.autoconfigure.web.ErrorController;
+import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory;
+import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -65,6 +71,36 @@ public class BSOPProductionApplication {
             });
         }
 
+    }
+    @Configuration
+    public static class ConnectorConfig {
+        
+        @Bean
+        public EmbeddedServletContainerFactory servletContainer() {
+            TomcatEmbeddedServletContainerFactory tomcat = new TomcatEmbeddedServletContainerFactory() {               
+                
+                @Override
+                protected void postProcessContext(Context context) {
+                    SecurityConstraint securityConstraint = new SecurityConstraint();
+                    securityConstraint.setUserConstraint("CONFIDENTAL");
+                    SecurityCollection collection = new SecurityCollection();
+                    collection.addPattern("/*");
+                    securityConstraint.addCollection(collection);
+                    context.addConstraint(securityConstraint);
+                }
+            };
+            tomcat.addAdditionalTomcatConnectors(getHttpConnector());
+            return tomcat;
+        }
+        
+        private Connector getHttpConnector() {
+            Connector connector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
+            connector.setScheme("http");
+            connector.setPort(8080);
+            connector.setSecure(false);
+            connector.setRedirectPort(8443);
+            return connector;
+        }
     }
     
     @Configuration
@@ -127,7 +163,6 @@ public class BSOPProductionApplication {
     public static class RedirectController implements ErrorController{
         private static final String ERROR_PATH = "/error";
         private static final String ERROR_FORWARD_PATH = "redirect:/";        
-        
         
         @RequestMapping(value = ERROR_PATH)
         @Override

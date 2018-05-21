@@ -40,8 +40,8 @@ public class AccountRepositoryTest {
     @Test
     public void whenFindByEmail_thenReturnAccount() {
         
-        Account me = new Account("zelezpet@fel.cvut.cz", "",Authority.ROLE_USER);
-        String pass = "password";       
+        Account me = new Account("frantaflinta@seznam.cz", "",Authority.ROLE_USER);
+        String pass = "password";      
         me.setPassword(pass);
         entityMan.persist(me);
         entityMan.flush();
