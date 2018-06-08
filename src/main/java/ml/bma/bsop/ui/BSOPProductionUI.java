@@ -49,7 +49,7 @@ import org.vaadin.spring.i18n.support.TranslatableUI;
 @EnableI18N
 public class BSOPProductionUI extends TranslatableUI implements Translatable {
     
-    public static final String URL = "http://app-bsopprodukce.193b.starter-ca-central-1.openshiftapps.com:8080";
+    public static final String URL = "http://app-bsopprodukce.193b.starter-ca-central-1.openshiftapps.com";
     
     private final AuthenticationManager authenticationManager;
     private final SpringViewProvider viewProvider;
