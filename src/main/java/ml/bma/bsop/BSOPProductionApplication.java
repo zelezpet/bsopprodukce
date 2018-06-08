@@ -72,6 +72,7 @@ public class BSOPProductionApplication {
         }
 
     }
+    /*
     @Configuration
     public static class ConnectorConfig {
         
@@ -102,7 +103,7 @@ public class BSOPProductionApplication {
             return connector;
         }
     }
-    
+    */
     @Configuration
     public static class BSOPProductionConfiguration {
 
