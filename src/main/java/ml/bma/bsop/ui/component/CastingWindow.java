@@ -253,20 +253,20 @@ public class CastingWindow extends Window implements Translatable {
     }
     
     private void initLists() {
-        
-        List<Casting> tmp = this.service.findAllConfirmed();
+        Performance performance = this.performanceItem.getPerformance();
+        List<Casting> tmp = this.service.findAllConfirmed(performance);
         for(Casting casting: tmp) {
             this.confirmedList.add(casting.getAbility());
         }
         this.confirmedList.sort(comparator);
         
-        tmp = this.service.findAllInvited();
+        tmp = this.service.findAllInvited(performance);
         for(Casting casting: tmp) {
             this.invitedList.add(casting.getAbility());
         }
         this.invitedList.sort(comparator);
         
-        tmp = this.service.findAllLogged();
+        tmp = this.service.findAllLogged(performance);
         for(Casting casting: tmp) {
             this.loggedList.add(casting.getAbility());
         }
