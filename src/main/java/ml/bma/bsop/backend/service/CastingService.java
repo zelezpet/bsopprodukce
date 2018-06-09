@@ -85,16 +85,16 @@ public class CastingService extends CrudService<Casting> {
         }
     }
     
-    public List<Casting> findAllInvited() {
-        return getRepository().findByCastState(CastState.INVITED);
+    public List<Casting> findAllInvited(Performance performance) {
+        return getRepository().findAllByCastStateAndPerformance(CastState.INVITED, performance);
     }
     
-    public List<Casting> findAllLogged() {
-        return getRepository().findByCastState(CastState.LOGGED);
+    public List<Casting> findAllLogged(Performance performance) {
+        return getRepository().findAllByCastStateAndPerformance(CastState.LOGGED, performance);
     }
     
-    public List<Casting> findAllConfirmed() {
-        return getRepository().findByCastState(CastState.CONFIRMED);
+    public List<Casting> findAllConfirmed(Performance performance) {
+        return getRepository().findAllByCastStateAndPerformance(CastState.CONFIRMED, performance);
     }
     
     public boolean existCasting(Ability ability) {
