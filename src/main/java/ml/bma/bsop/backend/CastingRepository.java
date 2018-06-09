@@ -52,5 +52,5 @@ public interface CastingRepository extends JpaRepository<Casting, Long> {
 
     public Casting findOneByAbilityAndCastState(Ability ability, CastState castState);
     
-    
+    public List<Casting> findAllByCastStateAndPerformance(CastState castState, Performance performance);
 }
