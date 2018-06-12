@@ -97,7 +97,7 @@ public class CastingService extends CrudService<Casting> {
         return getRepository().findAllByCastStateAndPerformance(CastState.CONFIRMED, performance);
     }
     
-    public boolean existCasting(Ability ability) {
+    public boolean existCasting(Ability ability, Performance performance) {
         List<Casting> castings = getRepository().findAllByAbility(ability);
         if(castings.isEmpty()) {
             return false;
@@ -112,8 +112,8 @@ public class CastingService extends CrudService<Casting> {
         return exist;
     }
     
-    public boolean existCastingLogged(Ability ability) {
-        Casting casting = getRepository().findOneByAbilityAndCastState(ability, CastState.LOGGED);
+    public boolean existCastingLogged(Ability ability, Performancce performance) {
+        Casting casting = getRepository().findOneByAbilityAndCastStateAndPerformance(ability, CastState.LOGGED, performance);
         return casting != null;
     }
 
