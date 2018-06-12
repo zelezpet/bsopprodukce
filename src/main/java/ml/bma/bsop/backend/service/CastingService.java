@@ -112,7 +112,7 @@ public class CastingService extends CrudService<Casting> {
         return exist;
     }
     
-    public boolean existCastingLogged(Ability ability, Performancce performance) {
+    public boolean existCastingLogged(Ability ability, Performance performance) {
         Casting casting = getRepository().findOneByAbilityAndCastStateAndPerformance(ability, CastState.LOGGED, performance);
         return casting != null;
     }
