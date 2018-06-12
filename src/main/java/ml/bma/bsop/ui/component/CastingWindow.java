@@ -358,8 +358,9 @@ public class CastingWindow extends Window implements Translatable {
     
     private void saveConfirmed(ClickEvent event) {
         int count = 0;
+        Performance performance = this.performanceItem.getPerformance();
         for(Ability ability: newConfirmed) {
-            if(service.existCastingLogged(ability)) {
+            if(service.existCastingLogged(ability, performance)) {
                 Casting casting = service.findByAbility(ability);
                 casting.setCastState(CastState.CONFIRMED);
                 service.save(casting);
@@ -378,8 +379,9 @@ public class CastingWindow extends Window implements Translatable {
     
     private void saveInvited(ClickEvent event) {
         int count = 0;
+        Performance performance = this.performanceItem.getPerformance();
         for(Ability ability: newInvited) {
-            if(!service.existCasting(ability)) {
+            if(!service.existCasting(ability, performance)) {
                 Casting casting = new Casting(ability, performanceItem.getPerformance(), CastState.INVITED);
                 service.save(casting);
                 count++;
